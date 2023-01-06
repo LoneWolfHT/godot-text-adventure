@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://font/FontLarge.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/KeyChangeMenu.gd" type="Script" id=2]
+
+[node name="KeyChangeMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Scroll" type="ScrollContainer" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 94.0
+grow_horizontal = 2
+grow_vertical = 2
+scroll_horizontal_enabled = false
+
+[node name="KeyList" type="VBoxContainer" parent="Panel/Scroll"]
+margin_right = 1280.0
+margin_bottom = 626.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 24
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -639.0
+margin_right = 640.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 1 )
+text = "Change Keys"
+align = 1
+valign = 1

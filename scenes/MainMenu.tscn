@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://font/Font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://font/FontLarge.tres" type="DynamicFont" id=1]
 [ext_resource path="res://PFP.png" type="Texture" id=2]
 [ext_resource path="res://font/Gravity-Regular.otf" type="DynamicFontData" id=3]
+[ext_resource path="res://elements/VolumeSlider.tscn" type="PackedScene" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -52,3 +53,13 @@ margin_right = 34.0
 margin_bottom = -2.0
 texture = ExtResource( 2 )
 expand = true
+
+[node name="VolumeSlider" parent="." instance=ExtResource( 4 )]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -61.0
+margin_top = -470.0
+margin_right = -17.0
+margin_bottom = -11.0
