@@ -5,7 +5,10 @@ func _ready():
 	_update_label()
 
 func _update_label():
-	$Label.text = "Volume: " + ((-self.value) as String) #apparently float->string negates the value?!
+	if self.value == 0:
+		$Label.text = "Volume: Default"
+	else:
+		$Label.text = "Volume: " + ((-self.value) as String) #apparently float->string negates the value?!
 
 var queue_update = false
 var timer = 0

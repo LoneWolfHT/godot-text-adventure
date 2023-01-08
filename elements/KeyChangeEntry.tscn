@@ -1,28 +1,32 @@
 [gd_scene load_steps=3 format=2]
 
+[ext_resource path="res://font/FontButton.tres" type="DynamicFont" id=1]
 [ext_resource path="res://elements/KeyChangeEntry.gd" type="Script" id=2]
-[ext_resource path="res://font/Font.tres" type="DynamicFont" id=3]
 
-[node name="HBoxContainer" type="HBoxContainer"]
-anchor_right = 1.0
+[node name="KeyChangeEntry" type="HBoxContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -640.0
+margin_right = 640.0
+margin_bottom = 43.0
 alignment = 1
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 581.0
-margin_top = 3.0
-margin_right = 627.0
-margin_bottom = 25.0
-custom_fonts/font = ExtResource( 3 )
+margin_left = 563.0
+margin_top = 6.0
+margin_right = 626.0
+margin_bottom = 35.5
+custom_fonts/font = ExtResource( 1 )
 text = "Label"
 
 [node name="Button" type="Button" parent="."]
-margin_left = 631.0
-margin_right = 698.0
-margin_bottom = 28.0
+margin_left = 630.0
+margin_right = 717.0
+margin_bottom = 43.0
 focus_mode = 0
 mouse_default_cursor_shape = 2
-custom_fonts/font = ExtResource( 3 )
+custom_fonts/font = ExtResource( 1 )
 toggle_mode = true
 text = "Button"
 

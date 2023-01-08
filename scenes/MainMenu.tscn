@@ -1,9 +1,13 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://font/FontLarge.tres" type="DynamicFont" id=1]
 [ext_resource path="res://PFP.png" type="Texture" id=2]
 [ext_resource path="res://font/Gravity-Regular.otf" type="DynamicFontData" id=3]
 [ext_resource path="res://elements/VolumeSlider.tscn" type="PackedScene" id=4]
+[ext_resource path="res://font/FontButton.tres" type="DynamicFont" id=5]
+[ext_resource path="res://util/buttonpress.gd" type="Script" id=6]
+[ext_resource path="res://scenes/MainMenu.gd" type="Script" id=7]
+[ext_resource path="res://scenes/KeyChangeMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -15,6 +19,7 @@ font_data = ExtResource( 3 )
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 7 )
 
 [node name="Title" type="Label" parent="."]
 anchor_left = 0.5
@@ -23,17 +28,57 @@ margin_left = -641.0
 margin_right = 641.0
 margin_bottom = 130.0
 custom_fonts/font = ExtResource( 1 )
-text = "Text Adventure"
+text = "Word Harveister"
 align = 1
 valign = 1
 
-[node name="Control" type="Control" parent="."]
+[node name="Play" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -79.0
+margin_top = 199.0
+margin_right = 79.0
+margin_bottom = 242.0
+custom_fonts/font = ExtResource( 5 )
+text = "Play Game"
+script = ExtResource( 6 )
+load_scene = "res://scenes/Game.tscn"
+
+[node name="ResetSave" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -79.0
+margin_top = 267.0
+margin_right = 79.0
+margin_bottom = 310.0
+rect_pivot_offset = Vector2( 21, 386 )
+custom_fonts/font = ExtResource( 5 )
+text = "Reset Game"
+script = ExtResource( 6 )
+button_name = "restart"
+signal_target = NodePath("..")
+
+[node name="KeyBinds" type="Button" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -79.0
+margin_top = 349.0
+margin_right = 79.0
+margin_bottom = 392.0
+rect_pivot_offset = Vector2( 21, 386 )
+custom_fonts/font = ExtResource( 5 )
+text = "Keybinds"
+script = ExtResource( 6 )
+button_name = "keybinds"
+signal_target = NodePath("..")
+
+[node name="Attribution" type="Control" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -40.0
 margin_right = 1273.0
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Label" type="Label" parent="Attribution"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 37.0
@@ -44,7 +89,7 @@ custom_fonts/font = SubResource( 1 )
 text = "Made by LandarVargan"
 valign = 1
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Attribution"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -63,3 +108,22 @@ margin_left = -61.0
 margin_top = -470.0
 margin_right = -17.0
 margin_bottom = -11.0
+
+[node name="QuitGame" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -79.0
+margin_top = 235.0
+margin_right = 79.0
+margin_bottom = 278.0
+rect_pivot_offset = Vector2( -281, -213 )
+custom_fonts/font = ExtResource( 5 )
+text = "Quit Game"
+script = ExtResource( 6 )
+button_name = "exit"
+signal_target = NodePath("..")
+
+[node name="KeyChangeMenu" parent="." instance=ExtResource( 8 )]
+visible = false

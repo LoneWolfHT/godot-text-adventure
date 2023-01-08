@@ -17,7 +17,6 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Pause="*res://util/Pause.gd"
 Audio="*res://util/Audio.gd"
 Settings="*res://util/Settings.gd"
 Quit="*res://util/Quit.gd"

@@ -1,6 +1,9 @@
+# Game-specific ignores
+*.wav
 
 # Godot-specific ignores
 .import/
+.godot/
 export.cfg
 export_presets.cfg
 *.import
