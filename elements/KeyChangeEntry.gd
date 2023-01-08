@@ -67,4 +67,6 @@ func _input(event):
 
 func _on_Button_toggled(button_pressed:bool):
 	grabbing_key = button_pressed
+	$Blip.volume_db = -4.0 + Settings.setting.audio_volume_shift
+	$Blip.play()
 	refresh()

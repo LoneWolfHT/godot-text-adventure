@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://elements/Page.gd" type="Script" id=1]
 [ext_resource path="res://font/Gravity-BoldItalic.otf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://font/Gravity-Regular.otf" type="DynamicFontData" id=5]
 [ext_resource path="res://audio/blip.ogg" type="AudioStream" id=6]
 [ext_resource path="res://font/FontSmall.tres" type="DynamicFont" id=7]
+[ext_resource path="res://audio/volumeblip.ogg" type="AudioStream" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 18
@@ -61,5 +62,10 @@ autowrap = true
 
 [node name="Blip" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+
+[node name="ButtonBlip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+volume_db = -4.0
+pitch_scale = 1.1
 
 [connection signal="meta_clicked" from="Content" to="." method="_on_meta_clicked"]

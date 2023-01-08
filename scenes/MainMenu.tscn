@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://font/FontLarge.tres" type="DynamicFont" id=1]
 [ext_resource path="res://PFP.png" type="Texture" id=2]
@@ -8,6 +8,9 @@
 [ext_resource path="res://util/buttonpress.gd" type="Script" id=6]
 [ext_resource path="res://scenes/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://scenes/KeyChangeMenu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://audio/volumeblip.ogg" type="AudioStream" id=9]
+[ext_resource path="res://font/FiraMono/FiraMono-Regular.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://audio/menu.ogg" type="AudioStream" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 14
@@ -15,6 +18,15 @@ use_mipmaps = true
 use_filter = true
 extra_spacing_bottom = 1
 font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.0470588, 0.0509804, 0.0823529, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 10 )
 
 [node name="MainMenu" type="Control"]
 anchor_right = 1.0
@@ -32,6 +44,17 @@ text = "Word Harveister"
 align = 1
 valign = 1
 
+[node name="Blip" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )
+volume_db = -4.0
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+autoplay = true
+
+[node name="Timer" type="Timer" parent="Music"]
+autostart = true
+
 [node name="Play" type="Button" parent="."]
 anchor_left = 0.5
 anchor_right = 0.5
@@ -42,7 +65,8 @@ margin_bottom = 242.0
 custom_fonts/font = ExtResource( 5 )
 text = "Play Game"
 script = ExtResource( 6 )
-load_scene = "res://scenes/Game.tscn"
+button_name = "play"
+signal_target = NodePath("..")
 
 [node name="ResetSave" type="Button" parent="."]
 anchor_left = 0.5
@@ -104,10 +128,55 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -61.0
-margin_top = -470.0
-margin_right = -17.0
-margin_bottom = -11.0
+margin_left = -1276.0
+margin_top = -515.0
+margin_right = -1248.0
+margin_bottom = -56.0
+
+[node name="Toggles" type="Panel" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -359.0
+margin_top = -101.0
+custom_styles/panel = SubResource( 2 )
+
+[node name="TypeSounds" type="CheckButton" parent="Toggles"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.5
+margin_top = -2.0
+margin_right = 170.5
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 3 )
+text = "Typing Sounds     "
+flat = true
+align = 2
+icon_align = 2
+
+[node name="Blip" type="AudioStreamPlayer" parent="Toggles/TypeSounds"]
+stream = ExtResource( 9 )
+
+[node name="ExtraHints" type="CheckButton" parent="Toggles"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -170.5
+margin_top = -42.0
+margin_right = 170.5
+margin_bottom = -2.0
+custom_fonts/font = SubResource( 3 )
+text = "Always Extra Hints"
+flat = true
+align = 2
+icon_align = 2
+
+[node name="Blip" type="AudioStreamPlayer" parent="Toggles/ExtraHints"]
+stream = ExtResource( 9 )
 
 [node name="QuitGame" type="Button" parent="."]
 anchor_left = 0.5
@@ -127,3 +196,8 @@ signal_target = NodePath("..")
 
 [node name="KeyChangeMenu" parent="." instance=ExtResource( 8 )]
 visible = false
+
+[connection signal="finished" from="Blip" to="." method="_on_Blip_finished"]
+[connection signal="timeout" from="Music/Timer" to="." method="_on_Timer_timeout"]
+[connection signal="toggled" from="Toggles/TypeSounds" to="." method="_on_TypeSounds_toggled"]
+[connection signal="toggled" from="Toggles/ExtraHints" to="." method="_on_ExtraHints_toggled"]

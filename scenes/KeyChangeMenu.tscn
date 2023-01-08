@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://font/FontLarge.tres" type="DynamicFont" id=1]
 [ext_resource path="res://scenes/KeyChangeMenu.gd" type="Script" id=2]
+[ext_resource path="res://audio/volumeblip.ogg" type="AudioStream" id=3]
 [ext_resource path="res://util/buttonpress.gd" type="Script" id=4]
 [ext_resource path="res://font/FontButton.tres" type="DynamicFont" id=5]
 
@@ -52,3 +53,7 @@ text = "< Back"
 script = ExtResource( 4 )
 button_name = "back"
 signal_target = NodePath("..")
+
+[node name="Blip" type="AudioStreamPlayer" parent="Back"]
+stream = ExtResource( 3 )
+volume_db = -4.0

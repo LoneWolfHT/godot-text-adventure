@@ -139,9 +139,9 @@ We'll need that next page decrypted to learn more.
 
 [color=#9999ff][CHAT CLOSED][/color][brk]
 
-[color=#11FF11][NEW MESSAGE FROM UNKNOWN]:[/color][brk][brk]
+[color=#339922][NEW MESSAGE FROM UNKNOWN]:[/color][brk][brk]
 
-[color=#11FF11]<Harvest Moon>[/color] Hello, nice work. You might find this data to be of interest:[brk] >[hack]theend[/hack]<
+[color=#339922]<Harvest Moon>[/color] Hello, nice work. You might find this data to be of interest:[brk] >[hack]theend[/hack]<
 """,
 
 "1337":
@@ -172,6 +172,8 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	rng.randomize()
+
+	$Music.volume_db += Settings.setting.audio_volume_shift
 
 	update_game(Settings.setting.current_page as String)
 
@@ -277,5 +279,8 @@ func update_game(current_page):
 		$Page.set_content(current_page + ": [color=red]Whoops, something went wrong, this page doesn't exist[/color]")
 
 func _on_button_activate(button):
+	$Blip.volume_db = -4.0 + Settings.setting.audio_volume_shift
+	$Blip.play()
+
 	if button == "keybinds":
 		$KeyChangeMenu.visible = true

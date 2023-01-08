@@ -56,6 +56,8 @@ func to_inputevent(x):
 	return out
 
 func _on_button_activate(button):
+	$Back/Blip.volume_db = -4.0 + Settings.setting.audio_volume_shift
+	$Back/Blip.play()
 	if button == "back":
 		self.visible = false
 		emit_signal("went_back")

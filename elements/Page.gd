@@ -5,6 +5,7 @@ var _queued_text
 var _queued_text_clean
 var _step = 1
 var _letter_step = 1
+var _resume = false
 
 signal start_hacking
 signal start_next
@@ -13,6 +14,8 @@ var content_set = false
 
 func _ready():
 	update_help_text()
+
+	$Blip.volume_db += Settings.setting.audio_volume_shift
 
 	if self.connect("start_hacking", get_parent(), "start_hacking") != OK:
 		push_error("Parent doesn't handle hack requests")
@@ -25,8 +28,15 @@ func update_help_text():
 
 func set_content(contents: String):
 	content_set = true
-	_queue = true
-	$Blip.play()
+
+	if contents.length() > 0:
+		_queue = true
+		_resume = false
+		if Settings.setting.typing_sounds:
+			$Blip.play()
+	else:
+		$Content.bbcode_text = ""
+
 	_step = 1
 	_letter_step = 1
 	_queued_text = (contents
@@ -51,6 +61,8 @@ func _on_meta_clicked(meta):
 		return
 
 	meta = str(meta)
+
+	$ButtonBlip.play()
 
 	if meta.begins_with("starthack_"):
 		emit_signal("start_hacking", meta.substr("starthack_".length(), -1))
@@ -80,9 +92,16 @@ func _process(delta):
 
 					if _queued_text[_step - 1] == "`":
 						_step += 1
+						if !_resume:
+							_resume = true
+							$Blip.stop()
 						_text_timer = -0.14
 						break
 					else:
+						if Settings.setting.typing_sounds && _resume:
+							_resume = false
+							$Blip.play()
+
 						$Content.bbcode_text = _queued_text_clean.left(_letter_step)
 						_letter_step += 1
 						_step += 1

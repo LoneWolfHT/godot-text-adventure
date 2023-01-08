@@ -1,14 +1,14 @@
 extends VScrollBar
 
 func _ready():
-	self.value = Settings.setting.audio_volume_shift
+	self.value = -Settings.setting.audio_volume_shift
 	_update_label()
 
 func _update_label():
 	if self.value == 0:
 		$Label.text = "Volume: Default"
 	else:
-		$Label.text = "Volume: " + ((-self.value) as String) #apparently float->string negates the value?!
+		$Label.text = "Volume: " + ((-self.value) as String)
 
 var queue_update = false
 var timer = 0
@@ -24,6 +24,8 @@ func _process(delta):
 
 
 func _on_VolumeSlider_value_changed(value:float):
-	Settings.setting.audio_volume_shift = value
+	Settings.setting.audio_volume_shift = -value
 	_update_label()
+	$Blip.volume_db = 0.0 + Settings.setting.audio_volume_shift
+	$Blip.play()
 	queue_update = true
